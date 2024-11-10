@@ -51,5 +51,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Rusty Hope.sln"
+    "dotnet.defaultSolution": "Rusty-Hope.sln"
 }
