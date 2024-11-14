@@ -30,6 +30,7 @@ namespace Platformer.Mechanics
     {
          if (collision.CompareTag("CineMachine")) return; 
 
+        Debug.Log("Projectile collided with: " + collision.name);
         hit = true;
         boxCollider.enabled = false;
         anim.SetTrigger("explode");
