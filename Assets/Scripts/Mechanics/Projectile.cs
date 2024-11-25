@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Platformer.Core.Simulation;
+using Platformer.Gameplay; // Importing the namespace for EnemyController
 
 namespace Platformer.Mechanics
 {
@@ -30,7 +32,17 @@ namespace Platformer.Mechanics
     {
          if (collision.CompareTag("CineMachine")) return; 
 
-        Debug.Log("Projectile collided with: " + collision.name);
+         Debug.Log("Projectile collided with: " + collision.name);
+
+         // Check if the collision is with an enemy
+         var enemy = collision.GetComponent<EnemyController>();
+         if (enemy != null)
+            {
+                Debug.Log("Enemy hit by projectile.");
+                Schedule<EnemyDeath>().enemy = enemy; // Trigger EnemyDeath event
+                collision.gameObject.SetActive(false); // Optionally deactivate the enemy
+            }
+            
         hit = true;
         boxCollider.enabled = false;
         anim.SetTrigger("explode");
