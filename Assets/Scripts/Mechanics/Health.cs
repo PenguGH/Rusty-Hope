@@ -2,6 +2,9 @@ using System;
 using Platformer.Gameplay;
 using UnityEngine;
 using static Platformer.Core.Simulation;
+using Platformer.Core;
+using Platformer.Mechanics;
+using Platformer.Model;
 
 namespace Platformer.Mechanics
 {
@@ -13,8 +16,14 @@ namespace Platformer.Mechanics
         /// <summary>
         /// The maximum hit points for the entity.
         /// </summary>
-        public int maxHP = 1;
+        public int maxHP = 3;
 
+        private bool dead;
+
+        [Header("Components")]
+        [SerializeField] private Behaviour[] components;
+
+        private Animator anim;
         /// <summary>
         /// Indicates if the entity should be considered 'alive'.
         /// </summary>
@@ -55,6 +64,36 @@ namespace Platformer.Mechanics
         void Awake()
         {
             currentHP = maxHP;
+            anim = GetComponent<Animator>();
         }
+
+    public void TakeDamage(float _damage)
+    {
+        //if (invulnerable) return;
+        currentHP = Mathf.Clamp(currentHP - (int)_damage, 0, maxHP);
+
+        if (currentHP > 0)
+        {
+            anim.SetTrigger("hurt");
+            //StartCoroutine(Invunerability());
+        }
+        else
+        {
+            if (!dead)
+            {
+                anim.SetTrigger("dead");
+
+                // Schedule the HealthIsZero event
+                 var healthZeroEvent = Schedule<HealthIsZero>();
+                healthZeroEvent.health = this;
+
+                // Deactivate attached components
+                foreach (Behaviour component in components)
+                component.enabled = false;
+
+                dead = true;
+            }
+        }
+    }
     }
 }
