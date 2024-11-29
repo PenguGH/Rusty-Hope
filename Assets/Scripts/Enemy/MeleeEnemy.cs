@@ -61,7 +61,7 @@ public class MeleeEnemy : MonoBehaviour
     {
         if (PlayerInSight())
         {
-            playerHealth.TakeDamage(damage);
+            playerHealth.Die();
         }
     }
 }

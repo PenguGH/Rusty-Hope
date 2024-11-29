@@ -18,11 +18,6 @@ namespace Platformer.Mechanics
         /// </summary>
         public int maxHP = 3;
 
-        private bool dead;
-
-        [Header("Components")]
-        [SerializeField] private Behaviour[] components;
-
         private Animator anim;
         /// <summary>
         /// Indicates if the entity should be considered 'alive'.
@@ -59,6 +54,7 @@ namespace Platformer.Mechanics
         public void Die()
         {
             while (currentHP > 0) Decrement();
+
         }
 
         void Awake()
@@ -67,33 +63,5 @@ namespace Platformer.Mechanics
             anim = GetComponent<Animator>();
         }
 
-    public void TakeDamage(float _damage)
-    {
-        //if (invulnerable) return;
-        currentHP = Mathf.Clamp(currentHP - (int)_damage, 0, maxHP);
-
-        if (currentHP > 0)
-        {
-            anim.SetTrigger("hurt");
-            //StartCoroutine(Invunerability());
-        }
-        else
-        {
-            if (!dead)
-            {
-                anim.SetTrigger("dead");
-
-                // Schedule the HealthIsZero event
-                 var healthZeroEvent = Schedule<HealthIsZero>();
-                healthZeroEvent.health = this;
-
-                // Deactivate attached components
-                foreach (Behaviour component in components)
-                component.enabled = false;
-
-                dead = true;
-            }
-        }
-    }
     }
 }
