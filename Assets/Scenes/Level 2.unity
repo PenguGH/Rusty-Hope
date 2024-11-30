@@ -6711,7 +6711,12 @@ PrefabInstance:
     - target: {fileID: 1058083309998372593, guid: 5fdb00204be6bd544af2de3bbe7ebeba,
         type: 3}
       propertyPath: maxHP
-      value: 1
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1058083309998372593, guid: 5fdb00204be6bd544af2de3bbe7ebeba,
+        type: 3}
+      propertyPath: currentHP
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1066556859019235452, guid: 5fdb00204be6bd544af2de3bbe7ebeba,
         type: 3}
@@ -6772,7 +6777,7 @@ PrefabInstance:
         type: 3}
       propertyPath: health
       value: 
-      objectReference: {fileID: 1484652605}
+      objectReference: {fileID: 0}
     - target: {fileID: 4588196979951296929, guid: 5fdb00204be6bd544af2de3bbe7ebeba,
         type: 3}
       propertyPath: collider2d
@@ -9494,6 +9499,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 3
+  currentHP: 0
+  Type: 1
 --- !u!114 &506904468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22816,18 +22823,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1484652605 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1058083309998372593, guid: 5fdb00204be6bd544af2de3bbe7ebeba,
-    type: 3}
-  m_PrefabInstance: {fileID: 327935884}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffad43bb006db4856a9c527b89b48db9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1486842588
 GameObject:
   m_ObjectHideFlags: 0

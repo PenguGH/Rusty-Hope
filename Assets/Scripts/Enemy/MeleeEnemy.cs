@@ -43,11 +43,13 @@ public class MeleeEnemy : MonoBehaviour
         RaycastHit2D hit = Physics2D.BoxCast(boxCollider.bounds.center + transform.right * range * transform.localScale.x * colliderDistance, 
         new Vector3(boxCollider.bounds.size.x * range, boxCollider.bounds.size.y, boxCollider.bounds.size.z),
         0, Vector2.left, 0, playerLayer);
-        
-        if(hit.collider != null)
-            playerHealth = hit.transform.GetComponent<Health>();
 
-        return hit.collider != null;
+        if (hit.collider != null && hit.transform.CompareTag("Player")) // Ensure it's the player
+        {
+            playerHealth = hit.transform.GetComponent<Health>();
+        }
+
+        return hit.collider != null && hit.transform.CompareTag("Player");
     }
 
     private void OnDrawGizmos()
@@ -61,7 +63,21 @@ public class MeleeEnemy : MonoBehaviour
     {
         if (PlayerInSight())
         {
+            //playerHealth.Die();
+                if (PlayerInSight() && playerHealth != null)
+    {
+        playerHealth.Decrement(); // Decrement the player's health
+
+        if (!playerHealth.IsAlive) // Check if the player's health has reached 0
+        {
+            Debug.Log("Player has died.");
             playerHealth.Die();
         }
+        else
+        {
+            Debug.Log($"Player took damage. Remaining health: {playerHealth.currentHP}");
+        }
     }
-}
+        }
+        }
+    }

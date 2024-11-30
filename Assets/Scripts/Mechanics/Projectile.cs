@@ -35,13 +35,31 @@ namespace Platformer.Mechanics
          Debug.Log("Projectile collided with: " + collision.name);
 
          // Check if the collision is with an enemy
-         var enemy = collision.GetComponent<EnemyController>();
-         if (enemy != null)
-            {
-                Debug.Log("Enemy hit by projectile.");
-                Schedule<EnemyDeath>().enemy = enemy; // Trigger EnemyDeath event
-                collision.gameObject.SetActive(false); // Optionally deactivate the enemy
-            }
+         //var enemy = collision.GetComponent<EnemyController>();
+         //if (enemy != null)
+           // {
+              //  Debug.Log("Enemy hit by projectile.");
+              //  Schedule<EnemyDeath>().enemy = enemy; // Trigger EnemyDeath event
+              //  collision.gameObject.SetActive(false); // Optionally deactivate the enemy
+           // }
+           var enemy = collision.GetComponent<EnemyController>();
+            var enemyHealth = collision.GetComponent<Health>(); // Access Health component for the enemy
+
+        if (enemy != null && collision.CompareTag("Enemy") && enemyHealth != null)
+    {
+        Debug.Log("Enemy hit by projectile.");
+
+        enemyHealth.Decrement(); // Decrement enemy health
+
+        Debug.Log(enemyHealth);
+    
+    if (!enemyHealth.IsAlive) // Check if health is 0
+    {
+        Debug.Log("Enemy has died.");
+        Schedule<EnemyDeath>().enemy = enemy; // Trigger EnemyDeath event
+        collision.gameObject.SetActive(false); // Optionally deactivate the enemy
+    }
+}
             
         hit = true;
         boxCollider.enabled = false;
