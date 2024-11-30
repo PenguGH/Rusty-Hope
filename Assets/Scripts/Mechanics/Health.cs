@@ -16,7 +16,7 @@ namespace Platformer.Mechanics
         /// <summary>
         /// The maximum hit points for the entity.
         /// </summary>
-        public int maxHP = 3;
+        public int maxHP = 50;
 
         private Animator anim;
         /// <summary>
