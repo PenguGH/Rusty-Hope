@@ -72,6 +72,7 @@ public class MeleeEnemy : MonoBehaviour
     {
         if (PlayerInSight() && playerHealth != null)
         {
+
         playerHealth.Decrement(); // Decrement the player's health
 
         if (!playerHealth.IsAlive) // Check if the player's health has reached 0

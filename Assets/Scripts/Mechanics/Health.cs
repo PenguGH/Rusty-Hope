@@ -69,19 +69,25 @@ namespace Platformer.Mechanics
             // Handle death logic based on entity type
             if (Type.Equals(EntityType.Player))
             {
-                var ev = Schedule<HealthIsZero>();
-                ev.health = this;
+                ScheduleHealthIsZeroEvent();
                 
                 Debug.Log("Player has died. Triggering game over logic.");
                 
             }
-            else if (Type == EntityType.Enemy)
+            else if (Type.Equals(EntityType.Enemy))
             {
                 Debug.Log("Enemy has died. Removing enemy from the game.");
                 gameObject.SetActive(false); // Deactivate or destroy the enemy
             }
                 
             }
+        }
+
+                private void ScheduleHealthIsZeroEvent()
+        {
+            Debug.Log("Scheduling HealthIsZero event for: " + gameObject.name);
+            var ev = Schedule<HealthIsZero>();
+            ev.health = this;
         }
 
         /// <summary>
