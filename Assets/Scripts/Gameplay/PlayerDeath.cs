@@ -16,6 +16,7 @@ namespace Platformer.Gameplay
 
         public override void Execute()
         {
+            Debug.Log("PlayerDeath event executed.");
             var player = model.player;
             if (player.health.IsAlive)
             {

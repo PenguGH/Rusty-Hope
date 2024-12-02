@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Platformer.Mechanics;
+using Platformer.Gameplay;
 
 public class MeleeEnemy : MonoBehaviour
 {
@@ -19,9 +20,12 @@ public class MeleeEnemy : MonoBehaviour
 
     private Health playerHealth;
 
+    private EnemyPatrol enemyPatrol;
+
     private void Awake()
     {
         anim = GetComponent<Animator>();
+        enemyPatrol = GetComponentInParent<EnemyPatrol>();
     }
     private void Update()
     {
@@ -36,6 +40,11 @@ public class MeleeEnemy : MonoBehaviour
                 anim.SetTrigger("meleeAttack");
             }
         }
+
+        if(enemyPatrol != null) 
+        {
+            enemyPatrol.enabled = !PlayerInSight();
+        }    
     }
 
     private bool PlayerInSight()
@@ -61,11 +70,8 @@ public class MeleeEnemy : MonoBehaviour
 
     private void DamagePlayer()
     {
-        if (PlayerInSight())
+        if (PlayerInSight() && playerHealth != null)
         {
-            //playerHealth.Die();
-                if (PlayerInSight() && playerHealth != null)
-    {
         playerHealth.Decrement(); // Decrement the player's health
 
         if (!playerHealth.IsAlive) // Check if the player's health has reached 0
@@ -77,7 +83,6 @@ public class MeleeEnemy : MonoBehaviour
         {
             Debug.Log($"Player took damage. Remaining health: {playerHealth.currentHP}");
         }
-    }
-        }
         }
     }
+}
