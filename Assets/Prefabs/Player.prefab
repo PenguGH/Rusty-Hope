@@ -275,6 +275,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 1
+  currentHP: 0
+  Type: 0
 --- !u!61 &8460316563540310948
 BoxCollider2D:
   m_ObjectHideFlags: 0

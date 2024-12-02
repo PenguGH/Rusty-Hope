@@ -9,7 +9,7 @@ using Platformer.Model;
 namespace Platformer.Mechanics
 {
     /// <summary>
-    /// Represebts the current vital statistics of some game entity.
+    /// Represents the current vital statistics of some game entity.
     /// </summary>
     public class Health : MonoBehaviour
     {
@@ -88,6 +88,25 @@ namespace Platformer.Mechanics
             Debug.Log("Scheduling HealthIsZero event for: " + gameObject.name);
             var ev = Schedule<HealthIsZero>();
             ev.health = this;
+        }
+
+        /// <summary>
+        /// Permanently increases the maximum HP by a specified amount.
+        /// Optionally, increase the current HP to match the new max HP.
+        /// </summary>
+        public void IncreaseMaxHP(int amount, bool increaseCurrentHP = false)
+        {
+            maxHP += amount;
+
+            if (increaseCurrentHP)
+            {
+                currentHP = maxHP; // Set current HP to match the new max HP
+            }
+            else
+            {
+                currentHP = Mathf.Clamp(currentHP, 0, maxHP); // Keep current HP within valid range
+            }
+            Debug.Log($"Max HP increased by {amount}. New max HP: {maxHP}. Current HP: {currentHP}");
         }
 
         /// <summary>

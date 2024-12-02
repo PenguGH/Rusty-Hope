@@ -35,6 +35,8 @@ namespace Platformer.Mechanics
         public bool controlEnabled = true;
 
         bool jump;
+        bool canDoubleJump = false; // Tracks if double jump is enabled
+        bool hasDoubleJumped = false; // Tracks if double jump has been used
         Vector2 move;
         SpriteRenderer spriteRenderer;
         internal Animator animator;
@@ -56,9 +58,26 @@ namespace Platformer.Mechanics
             if (controlEnabled)
             {
                 move.x = Input.GetAxis("Horizontal");
-                if (jumpState == JumpState.Grounded && Input.GetButtonDown("Jump"))
-                    jumpState = JumpState.PrepareToJump;
-                else if (Input.GetButtonUp("Jump"))
+
+                if (Input.GetButtonDown("Jump"))
+                {
+                    if (jumpState == JumpState.Grounded)
+                    {
+                        jumpState = JumpState.PrepareToJump;
+                    }
+                    else if (canDoubleJump && !hasDoubleJumped)
+                    {
+                        // Trigger double jump
+                        hasDoubleJumped = true;
+                        jump = true;
+                        velocity.y = jumpTakeOffSpeed * model.jumpModifier; // Apply double jump velocity
+                        animator.SetTrigger("double_jump"); // Trigger double jump animation
+                        if (audioSource && jumpAudio)
+                            audioSource.PlayOneShot(jumpAudio);
+                    }
+                }
+
+                if (Input.GetButtonUp("Jump"))
                 {
                     stopJump = true;
                     Schedule<PlayerStopJump>().player = this;
@@ -94,6 +113,7 @@ namespace Platformer.Mechanics
                     {
                         Schedule<PlayerLanded>().player = this;
                         jumpState = JumpState.Landed;
+                        hasDoubleJumped = false; // Reset double jump when grounded
                     }
                     break;
                 case JumpState.Landed:
@@ -119,14 +139,24 @@ namespace Platformer.Mechanics
             }
 
             if (move.x > 0.01f)
-                transform.localScale = new Vector3(3,3,-3);
+                transform.localScale = new Vector3(3, 3, -3);
             else if (move.x < -0.01f)
-                transform.localScale = new Vector3(-3,3,3);
+                transform.localScale = new Vector3(-3, 3, 3);
 
             animator.SetBool("grounded", IsGrounded);
             animator.SetFloat("velocityX", Mathf.Abs(velocity.x) / maxSpeed);
 
             targetVelocity = move * maxSpeed;
+        }
+
+        /// <summary>
+        /// Enables the double jump ability when picking up the jetpack.
+        /// </summary>
+        public void EnableDoubleJump()
+        {
+            canDoubleJump = true;
+            animator.SetBool("has_jetpack", true); // Show the jetpack
+            Debug.Log("Double jump enabled!");
         }
 
         public enum JumpState
