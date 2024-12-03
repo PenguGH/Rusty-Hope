@@ -46,9 +46,9 @@ namespace Platformer.Mechanics
         /// Decrement the HP of the entity. Will trigger a HealthIsZero event when
         /// current HP reaches 0.
         /// </summary>
-        public void Decrement()
+        public void Decrement(int damage = 1)
         {
-            currentHP = Mathf.Clamp(currentHP - 1, 0, maxHP);
+            currentHP = Mathf.Clamp(currentHP - damage, 0, maxHP);
 
             Debug.Log($"Decrement called on: {gameObject.name} with type: {Type} and currentHP: {currentHP}");
 
@@ -59,31 +59,28 @@ namespace Platformer.Mechanics
 
             if (currentHP == 0)
             {
+                // Schedule HealthIsZero event regardless of entity type
+                //var ev = Schedule<HealthIsZero>();
+                //ev.health = this;
 
-                        // Schedule HealthIsZero event regardless of entity type
-       //var ev = Schedule<HealthIsZero>();
-        //ev.health = this;
+                //Debug.Log($"{gameObject.name} has died. Triggering HealthIsZero event.");
 
-       //Debug.Log($"{gameObject.name} has died. Triggering HealthIsZero event.");
-
-            // Handle death logic based on entity type
-            if (Type.Equals(EntityType.Player))
-            {
-                ScheduleHealthIsZeroEvent();
-                
-                Debug.Log("Player has died. Triggering game over logic.");
-                
-            }
-            else if (Type.Equals(EntityType.Enemy))
-            {
-                Debug.Log("Enemy has died. Removing enemy from the game.");
-                gameObject.SetActive(false); // Deactivate or destroy the enemy
-            }
-                
+                // Handle death logic based on entity type
+                if (Type == EntityType.Player)
+                {
+                    Debug.Log("Player has died. Triggering game over logic.");
+                    var ev = Schedule<HealthIsZero>();
+                    ev.health = this;
+                }
+                else if (Type == EntityType.Enemy)
+                {
+                    Debug.Log("Enemy has died. Removing enemy from the game.");
+                    gameObject.SetActive(false); // Deactivate or destroy the enemy
+                }
             }
         }
 
-                private void ScheduleHealthIsZeroEvent()
+        private void ScheduleHealthIsZeroEvent()
         {
             Debug.Log("Scheduling HealthIsZero event for: " + gameObject.name);
             var ev = Schedule<HealthIsZero>();
@@ -115,7 +112,6 @@ namespace Platformer.Mechanics
         public void Die()
         {
             while (currentHP > 0) Decrement();
-
         }
 
         void Awake()
@@ -123,16 +119,15 @@ namespace Platformer.Mechanics
             currentHP = maxHP;
             anim = GetComponent<Animator>();
 
-                // Assign Type based on the specific entity
-    if (gameObject.CompareTag("Player"))
-    {
-        Type = EntityType.Player;
-    }
-    else if (gameObject.CompareTag("Enemy"))
-    {
-        Type = EntityType.Enemy;
-    }
+            // Assign Type based on the specific entity
+            if (gameObject.CompareTag("Player"))
+            {
+                Type = EntityType.Player;
+            }
+            else if (gameObject.CompareTag("Enemy"))
+            {
+                Type = EntityType.Enemy;
+            }
         }
-
-    }
+    } 
 }

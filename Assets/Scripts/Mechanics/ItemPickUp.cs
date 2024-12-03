@@ -37,6 +37,15 @@ public class ItemPickUp : MonoBehaviour
                         Debug.Log("Jetpack picked up! Double jump is now enabled.");
                     }
                 }
+                else if (itemName == "Blaster_Upgrade")
+                {
+                    var playerAttack = collision.GetComponent<PlayerAttack>();
+                    if (playerAttack != null)
+                    {
+                        playerAttack.UpgradePlasmaDamage(3); // Increase plasma damage by 3
+                    }
+                    Debug.Log("Plasma ball damage upgraded!");
+                }
 
                 Debug.Log($"Picked up {itemName}");
                 Destroy(gameObject); // Destroy the pickup after it's collected

@@ -10,8 +10,9 @@ namespace Platformer.Mechanics
     {
         private float direction;
         [SerializeField] private float speed;
-        [SerializeField] private int damage = 1; // Base damage for the projectile
         private bool hit;
+
+        [SerializeField] private int damage = 1; // Default damage
 
         private BoxCollider2D boxCollider;
         private Animator anim;
@@ -31,41 +32,32 @@ namespace Platformer.Mechanics
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.CompareTag("CineMachine")) return; 
+            if (collision.CompareTag("CineMachine")) return;
 
             Debug.Log("Projectile collided with: " + collision.name);
 
-            // Check if the collision is with an enemy
-            // var enemy = collision.GetComponent<EnemyController>();
-            // if (enemy != null)
-            // {
-                // Debug.Log("Enemy hit by projectile.");
-                // Schedule<EnemyDeath>().enemy = enemy; // Trigger EnemyDeath event
-                // collision.gameObject.SetActive(false); // Optionally deactivate the enemy
-            // }
             var enemy = collision.GetComponent<EnemyController>();
-            var enemyHealth = collision.GetComponent<Health>(); // Access Health component for the enemy
+            var enemyHealth = collision.GetComponent<Health>();
 
             if (enemy != null && collision.CompareTag("Enemy") && enemyHealth != null)
             {
                 Debug.Log("Enemy hit by projectile.");
 
-                enemyHealth.Decrement(); // Decrement enemy health
+                enemyHealth.Decrement(damage); // Decrease health by the projectile's damage
 
                 Debug.Log(enemyHealth);
-            
-                if (!enemyHealth.IsAlive) // Check if health is 0
+
+                if (!enemyHealth.IsAlive)
                 {
                     Debug.Log("Enemy has died.");
-                    Schedule<EnemyDeath>().enemy = enemy; // Trigger EnemyDeath event
+                    Schedule<EnemyDeath>().enemy = enemy;
                     collision.gameObject.SetActive(false); // Optionally deactivate the enemy
                 }
             }
-                
+
             hit = true;
             boxCollider.enabled = false;
             anim.SetTrigger("explode");
-
         }
 
         public void SetDirection(float _direction)
@@ -76,23 +68,20 @@ namespace Platformer.Mechanics
             boxCollider.enabled = true;
 
             float localScaleX = transform.localScale.x;
-            if(Mathf.Sign(localScaleX) != _direction)
+            if (Mathf.Sign(localScaleX) != _direction)
                 localScaleX = -localScaleX;
-            
+
             transform.localScale = new Vector3(localScaleX, transform.localScale.y, transform.localScale.z);
+        }
+
+        public void SetDamage(int newDamage)
+        {
+            damage = newDamage;
         }
 
         private void Deactivate()
         {
             gameObject.SetActive(false);
-        }
-
-        /// <summary>
-        /// Set the damage for the projectile.
-        /// </summary>
-        public void SetDamage(int newDamage)
-        {
-            damage = newDamage;
         }
     }
 }

@@ -21,7 +21,12 @@ public class PickUpManager : MonoBehaviour
 
     public void AddItem(string itemName)
     {
-            if (!collectedItems.Contains(itemName)) // Ensure the item doesn't already exist
+        if (string.IsNullOrEmpty(itemName))
+        {
+            Debug.LogError("Cannot add a null or empty item to the inventory.");
+            return;
+        }
+        if (!collectedItems.Contains(itemName)) // Ensure the item doesn't already exist
         {
             collectedItems.Add(itemName);
             Debug.Log($"Item {itemName} added to inventory.");
