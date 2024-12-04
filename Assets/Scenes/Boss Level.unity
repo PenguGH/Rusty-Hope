@@ -587,6 +587,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Blaster_Upgrade
       objectReference: {fileID: 0}
+    - target: {fileID: 2229831917523959642, guid: 48d789c37bbfb694fac726f9c6a63e54,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5512642089486625910, guid: 48d789c37bbfb694fac726f9c6a63e54,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11040,6 +11045,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Jetpack_PickUp
       objectReference: {fileID: 0}
+    - target: {fileID: 9146925094695557263, guid: 6da1fd86b952b8843bb5a7edaa7b154e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12205,6 +12215,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Health_Upgrade
+      objectReference: {fileID: 0}
+    - target: {fileID: 3406539850562963282, guid: 87b8052779b0d62409701263775cfcf9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7858999234614258081, guid: 87b8052779b0d62409701263775cfcf9,
         type: 3}
