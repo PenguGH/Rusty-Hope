@@ -13,6 +13,19 @@ namespace Platformer.Mechanics
     /// </summary>
     public class Health : MonoBehaviour
     {
+        void Start()
+        {
+            if (Type == EntityType.Player)
+            {
+                Debug.Log("Player health script initialized on: " + gameObject.name);
+            }
+            else if (Type == EntityType.Enemy)
+            {
+                Debug.Log("Enemy health script initialized on: " + gameObject.name);
+            }
+        }
+
+
         /// <summary>
         /// The maximum hit points for the entity.
         /// </summary>
@@ -114,8 +127,8 @@ namespace Platformer.Mechanics
             while (currentHP > 0) Decrement();
         }
 
-        void Awake()
-        {
+        void Awake(){
+
             currentHP = maxHP;
             anim = GetComponent<Animator>();
 

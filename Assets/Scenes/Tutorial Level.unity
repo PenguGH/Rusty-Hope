@@ -9004,7 +9004,7 @@ PrefabInstance:
     - target: {fileID: 1066556859019235452, guid: 5fdb00204be6bd544af2de3bbe7ebeba,
         type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1608799183723049568, guid: 5fdb00204be6bd544af2de3bbe7ebeba,
         type: 3}
@@ -9051,6 +9051,11 @@ PrefabInstance:
       propertyPath: plasma.Array.data[8]
       value: 
       objectReference: {fileID: 1125973361}
+    - target: {fileID: 3389934659469291405, guid: 5fdb00204be6bd544af2de3bbe7ebeba,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4588196979951296929, guid: 5fdb00204be6bd544af2de3bbe7ebeba,
         type: 3}
       propertyPath: collider2d
@@ -9064,7 +9069,7 @@ PrefabInstance:
     - target: {fileID: 7191381494888888094, guid: 5fdb00204be6bd544af2de3bbe7ebeba,
         type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7365780916693129055, guid: 5fdb00204be6bd544af2de3bbe7ebeba,
         type: 3}
