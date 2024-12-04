@@ -2,6 +2,7 @@ using Platformer.Core;
 using Platformer.Model;
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.SceneManagement;
 
 namespace Platformer.Mechanics
 {
@@ -31,7 +32,7 @@ namespace Platformer.Mechanics
             }
             else if (Instance != this)
             {
-                Debug.LogWarning("GameController: Duplicate instance detected, destroying...");
+                Debug.Log("GameController: Duplicate instance detected, destroying...");
                 Destroy(gameObject);
                 return;
             }
@@ -50,17 +51,25 @@ namespace Platformer.Mechanics
 
         void OnEnable()
         {
-            Instance = this;
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
 
         void OnDisable()
         {
-            if (Instance == this) Instance = null;
+           SceneManager.sceneLoaded -= OnSceneLoaded;
         }
 
         void Update()
         {
-            if (Instance == this) Simulation.Tick();
+            if (Instance == this && model != null && SceneManager.GetActiveScene().isLoaded)
+             Simulation.Tick();
+        }
+
+        private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            Debug.Log($"Scene loaded: {scene.name}");
+            Simulation.Clear();
+            AssignReferences();
         }
 
         /// <summary>
