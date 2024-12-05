@@ -31,6 +31,7 @@ public class LevelTransition : MonoBehaviour
         {
             // Load the next scene
             SceneManager.LoadScene(nextLevelName);
+            Debug.Log("Scene Load Completed");
         }
     }
 }
