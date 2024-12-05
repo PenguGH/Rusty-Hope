@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 7188219848504064479}
   - component: {fileID: 1058083309998372593}
   - component: {fileID: 8460316563540310948}
-  - component: {fileID: 8609788381845513098}
   - component: {fileID: 1608799183723049568}
   m_Layer: 13
   m_Name: Player
@@ -322,19 +321,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.14007118, y: 0.30470848}
   m_EdgeRadius: 0
---- !u!114 &8609788381845513098
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1066556859019235452}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8534e17a0f90604c9afd4f5c73d829f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Id: 2cedde77-9eec-414f-a172-5c4b3c8e2891
 --- !u!114 &1608799183723049568
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -359,6 +345,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  plasmaDamage: 1
 --- !u!1 &7191381494888888094
 GameObject:
   m_ObjectHideFlags: 0
