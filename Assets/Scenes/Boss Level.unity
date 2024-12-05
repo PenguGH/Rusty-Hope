@@ -10005,7 +10005,7 @@ PrefabInstance:
     - target: {fileID: 2449236629785787328, guid: 54292676288284cdc91efaed6091bae4,
         type: 3}
       propertyPath: nextLevelName
-      value: Tutorial Level
+      value: Ending Screen
       objectReference: {fileID: 0}
     - target: {fileID: 3817726892180481736, guid: 54292676288284cdc91efaed6091bae4,
         type: 3}
