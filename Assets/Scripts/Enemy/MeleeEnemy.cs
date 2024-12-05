@@ -21,11 +21,13 @@ public class MeleeEnemy : MonoBehaviour
     private Health playerHealth;
 
     private EnemyPatrol enemyPatrol;
+    private EnemyFollow enemyFollow;
 
     private void Awake()
     {
         anim = GetComponent<Animator>();
         enemyPatrol = GetComponentInParent<EnemyPatrol>();
+        enemyFollow = GetComponentInParent<EnemyFollow>();
     }
     private void Update()
     {
@@ -44,6 +46,11 @@ public class MeleeEnemy : MonoBehaviour
         if(enemyPatrol != null) 
         {
             enemyPatrol.enabled = !PlayerInSight();
+        }    
+
+         if(enemyFollow != null) 
+        {
+            enemyFollow.enabled = !PlayerInSight();
         }    
     }
 
