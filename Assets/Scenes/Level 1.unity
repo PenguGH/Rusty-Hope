@@ -11194,7 +11194,7 @@ PrefabInstance:
     - target: {fileID: 3817726892180481736, guid: 54292676288284cdc91efaed6091bae4,
         type: 3}
       propertyPath: m_Name
-      value: TransitionCapsule
+      value: TransitionCapsuleTest
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -9955,12 +9955,12 @@ PrefabInstance:
     - target: {fileID: 2017071792526658807, guid: 54292676288284cdc91efaed6091bae4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 79.26
+      value: 79.18
       objectReference: {fileID: 0}
     - target: {fileID: 2017071792526658807, guid: 54292676288284cdc91efaed6091bae4,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.57
+      value: 2.27
       objectReference: {fileID: 0}
     - target: {fileID: 2017071792526658807, guid: 54292676288284cdc91efaed6091bae4,
         type: 3}
@@ -10005,7 +10005,7 @@ PrefabInstance:
     - target: {fileID: 2449236629785787328, guid: 54292676288284cdc91efaed6091bae4,
         type: 3}
       propertyPath: nextLevelName
-      value: Level 2
+      value: Tutorial Level
       objectReference: {fileID: 0}
     - target: {fileID: 3817726892180481736, guid: 54292676288284cdc91efaed6091bae4,
         type: 3}
@@ -11818,6 +11818,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TransitionCapsule
+      objectReference: {fileID: 0}
+    - target: {fileID: 3817726892180481736, guid: 54292676288284cdc91efaed6091bae4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
